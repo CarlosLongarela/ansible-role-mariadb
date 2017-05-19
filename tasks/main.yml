@@ -1,0 +1,140 @@
+---
+- name: Añadimos el archivo del repositorio.
+  template:
+    src: mariadb.list.j2
+    dest: /etc/apt/sources.list.d/mariadb.list
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Añadimos la llave del repositorio.
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: '0xF1656F24C74CD1D8'
+    state: present
+
+- name: Instalamos el módulo Python MySQLB
+  pip:
+    name: MySQL-python
+
+- name: Instalamos MariaDB.
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ aptget_update_cache_valid_time }}"
+  with_items:
+    - mariadb-server
+    - mariadb-client
+
+- name: Iniciamos y activamos el servicio.
+  service:
+    name: "{{ mariadb_service_name }}"
+    state: started
+    enabled: yes
+
+- name: Copiamos ~/.my.cnf para root.
+  template:
+    src: my.cnf.j2
+    dest: /root/.my.cnf
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Instalamos el archivo de configuración de red.
+  template:
+    src: settings.cnf.j2
+    dest: /etc/mysql/mariadb.conf.d/settings.cnf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Reiniciar mariadb
+
+- name: Actualizamos la clave de root.
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "{{ mariadb_root_password }}"
+    state: present
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: Eliminamos la Base de datos test.
+  mysql_db:
+    name: test
+    state: absent
+
+- name: Eliminamos usuarios anónimos.
+  mysql_user:
+    name: ''
+    host: "{{ item }}"
+    state: absent
+  with_items:
+    - localhost
+
+- name: Creamos el directorio de utilidades.
+  file:
+    path: "{{ server_path_utiles }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0700
+  when: utiles_bd
+
+- name: Instalamos MySQLTuner.
+  get_url:
+    url: https://raw.githubusercontent.com/major/MySQLTuner-perl/master/mysqltuner.pl
+    dest: "{{ server_path_utiles }}/mysqltuner.pl"
+    owner: root
+    group: root
+    mode: 0740
+  when: utiles_bd
+
+- name: Instalamos el script de optimización de BD.
+  template:
+    src: optimiza_bd.sh.j2
+    dest: "{{ server_path_utiles }}/optimiza_bd.sh"
+    owner: root
+    group: root
+    mode: 0750
+  when: utiles_bd
+
+- name: Instalamos el script de backups de BD.
+  template:
+    src: copia_bd.sh.j2
+    dest: "{{ server_path_utiles }}/copia_bd.sh"
+    owner: root
+    group: root
+    mode: 0750
+  when: utiles_bd
+
+- name: Creamos el directorio de Backups de la BD.
+  file:
+    path: "{{ mariadb_path_backups }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0640
+  when: utiles_bd
+
+- name: Añadimos la tarea cron del BackUp de BD.
+  cron:
+    name: "BackUp de BDs"
+    minute: "{{ cron_backup_db.minute }}"
+    hour: "{{ cron_backup_db.hour }}"
+    day: "{{ cron_backup_db.day }}"
+    weekday: "{{ cron_backup_db.weekday }}"
+    job: "{{ server_path_utiles }}/copia_bd.sh"
+  when: utiles_bd
+
+- name: Añadimos la tarea cron de Optimización de BD.
+  cron:
+    name: "Optimización de BDs"
+    minute: "{{ cron_optimiza_db.minute }}"
+    hour: "{{ cron_optimiza_db.hour }}"
+    day: "{{ cron_optimiza_db.day }}"
+    weekday: "{{ cron_optimiza_db.weekday }}"
+    job: "{{ server_path_utiles }}/optimiza_bd.sh"
+  when: utiles_bd

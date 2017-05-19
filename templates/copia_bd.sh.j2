@@ -1,0 +1,23 @@
+#!/bin/sh
+# {{ ansible_managed }}
+# script para realizar la copia de seguridad programada en el cron de las bases de datos MariaDB
+
+# Fecha en el formato YYYY-MM-DD
+fecha=$(date +%F)
+
+# directorio local donde trabajaremos y guardaremos copia de todos los archivos
+DIRBACKUP="{{ mariadb_path_backups }}"
+
+# usuario y clave de MySQL
+USERMYSQL="root"
+PASSMYSQL="{{ mariadb_root_password }}"
+
+# Cambiamos al directorio de trabajo
+cd $DIRBACKUP
+
+# Bases de datos Mariadb a volcar (o "--all-databases" para realizar copia de todas las Bases de Datos)
+{% for database in mariadb_databases %}
+/usr/bin/mysqldump --opt --default-character-set=utf8 -u $USERMYSQL --password="$PASSMYSQL" {{ database }} | gzip -c > {{ database }}_$fecha.sql.gz
+echo Volcado de {{ database }} al archivo {{ database }}_$fecha.sql.gz realizado correctamente
+
+{% endfor %}
