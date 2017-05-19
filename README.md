@@ -74,6 +74,8 @@ Example Playbook
       gather_facts: no
       become: true
 
+      mariadb_root_password: cambiame
+
       mariadb_databases:
         - mydatabase
 

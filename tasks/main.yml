@@ -81,7 +81,7 @@
     owner: root
     group: root
     mode: 0700
-  when: utiles_bd
+  when: mariadb_utiles_bd
 
 - name: Instalamos MySQLTuner.
   get_url:
@@ -90,7 +90,7 @@
     owner: root
     group: root
     mode: 0740
-  when: utiles_bd
+  when: mariadb_utiles_bd
 
 - name: Instalamos el script de optimización de BD.
   template:
@@ -99,7 +99,7 @@
     owner: root
     group: root
     mode: 0750
-  when: utiles_bd
+  when: mariadb_utiles_bd
 
 - name: Instalamos el script de backups de BD.
   template:
@@ -117,7 +117,7 @@
     owner: root
     group: root
     mode: 0640
-  when: utiles_bd
+  when: mariadb_utiles_bd
 
 - name: Añadimos la tarea cron del BackUp de BD.
   cron:
@@ -127,7 +127,7 @@
     day: "{{ mariadb_cron_backup_db.day }}"
     weekday: "{{ mariadb_cron_backup_db.weekday }}"
     job: "{{ mariadb_server_path_utiles }}/copia_bd.sh"
-  when: utiles_bd
+  when: mariadb_utiles_bd
 
 - name: Añadimos la tarea cron de Optimización de BD.
   cron:
@@ -137,4 +137,4 @@
     day: "{{ mariadb_cron_optimiza_db.day }}"
     weekday: "{{ mariadb_cron_optimiza_db.weekday }}"
     job: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
-  when: utiles_bd
+  when: mariadb_utiles_bd
