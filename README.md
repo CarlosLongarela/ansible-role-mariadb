@@ -60,6 +60,8 @@ Role Variables
       day: "*"
       weekday: "0"
 
+    aptget_update_cache_valid_time: 3600
+
 
 Dependencies
 ------------
