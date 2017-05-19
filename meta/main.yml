@@ -1,6 +1,6 @@
 galaxy_info:
   author: Carlos Longarela
-  description:Installa, secure and configuration for MariaDB Server.
+  description: Installation, secure and configuration for MariaDB Server.
   company: Desarrollo web Carlos Longarela
 
   license: license GPLv2

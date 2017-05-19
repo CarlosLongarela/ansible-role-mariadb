@@ -4,7 +4,9 @@ mariadb_version: 10.1.22
 mariadb_service_name: mysql
 mariadb_secure_installation: True
 
-server_path_utiles: /root/utiles
+mariadb_root_password:
+
+mariadb_server_path_utiles: /root/utiles
 
 mariadb_path_backups: /home/db_backups/
 
@@ -30,13 +32,15 @@ mariadb_options:
   read_rnd_buffer_size: 4M
   key_buffer: 500M
 
-cron_backup_db:
+mariadb_utiles_bd: true
+
+mariadb_cron_backup_db:
   minute: "15"
   hour: "3"
   day: "*"
   weekday: "*"
 
-cron_optimiza_db:
+mariadb_cron_optimiza_db:
   minute: "1"
   hour: "3"
   day: "*"

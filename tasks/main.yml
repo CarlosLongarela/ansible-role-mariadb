@@ -76,7 +76,7 @@
 
 - name: Creamos el directorio de utilidades.
   file:
-    path: "{{ server_path_utiles }}"
+    path: "{{ mariadb_server_path_utiles }}"
     state: directory
     owner: root
     group: root
@@ -86,7 +86,7 @@
 - name: Instalamos MySQLTuner.
   get_url:
     url: https://raw.githubusercontent.com/major/MySQLTuner-perl/master/mysqltuner.pl
-    dest: "{{ server_path_utiles }}/mysqltuner.pl"
+    dest: "{{ mariadb_server_path_utiles }}/mysqltuner.pl"
     owner: root
     group: root
     mode: 0740
@@ -95,7 +95,7 @@
 - name: Instalamos el script de optimización de BD.
   template:
     src: optimiza_bd.sh.j2
-    dest: "{{ server_path_utiles }}/optimiza_bd.sh"
+    dest: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
     owner: root
     group: root
     mode: 0750
@@ -104,7 +104,7 @@
 - name: Instalamos el script de backups de BD.
   template:
     src: copia_bd.sh.j2
-    dest: "{{ server_path_utiles }}/copia_bd.sh"
+    dest: "{{ mariadb_server_path_utiles }}/copia_bd.sh"
     owner: root
     group: root
     mode: 0750
@@ -122,19 +122,19 @@
 - name: Añadimos la tarea cron del BackUp de BD.
   cron:
     name: "BackUp de BDs"
-    minute: "{{ cron_backup_db.minute }}"
-    hour: "{{ cron_backup_db.hour }}"
-    day: "{{ cron_backup_db.day }}"
-    weekday: "{{ cron_backup_db.weekday }}"
-    job: "{{ server_path_utiles }}/copia_bd.sh"
+    minute: "{{ mariadb_cron_backup_db.minute }}"
+    hour: "{{ mariadb_cron_backup_db.hour }}"
+    day: "{{ mariadb_cron_backup_db.day }}"
+    weekday: "{{ mariadb_cron_backup_db.weekday }}"
+    job: "{{ mariadb_server_path_utiles }}/copia_bd.sh"
   when: utiles_bd
 
 - name: Añadimos la tarea cron de Optimización de BD.
   cron:
     name: "Optimización de BDs"
-    minute: "{{ cron_optimiza_db.minute }}"
-    hour: "{{ cron_optimiza_db.hour }}"
-    day: "{{ cron_optimiza_db.day }}"
-    weekday: "{{ cron_optimiza_db.weekday }}"
-    job: "{{ server_path_utiles }}/optimiza_bd.sh"
+    minute: "{{ mariadb_cron_optimiza_db.minute }}"
+    hour: "{{ mariadb_cron_optimiza_db.hour }}"
+    day: "{{ mariadb_cron_optimiza_db.day }}"
+    weekday: "{{ mariadb_cron_optimiza_db.weekday }}"
+    job: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
   when: utiles_bd

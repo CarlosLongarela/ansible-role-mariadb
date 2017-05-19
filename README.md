@@ -20,7 +20,7 @@ Role Variables
 
     mariadb_root_password:
 
-    server_path_utiles: /root/utiles
+    mariadb_server_path_utiles: /root/utiles
 
     mariadb_path_backups: /home/db_backups/
 
@@ -46,13 +46,15 @@ Role Variables
       read_rnd_buffer_size: 4M
       key_buffer: 500M
 
-    cron_backup_db:
+    mariadb_utiles_bd: true
+
+    mariadb_cron_backup_db:
       minute: "15"
       hour: "3"
       day: "*"
       weekday: "*"
 
-    cron_optimiza_db:
+    mariadb_cron_optimiza_db:
       minute: "1"
       hour: "3"
       day: "*"
@@ -72,13 +74,13 @@ Example Playbook
       gather_facts: no
       become: true
 
-    mariadb_databases:
-      - mydatabase
+      mariadb_databases:
+        - mydatabase
 
-    utiles_bd: true
+      mariadb_utiles_bd: true
 
-      roles:
-         - { role: CarlosLongarela.mariadb }
+        roles:
+          - { role: CarlosLongarela.mariadb }
 
 License
 -------
