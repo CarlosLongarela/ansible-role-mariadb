@@ -1,7 +1,7 @@
 Ansible Role: MariaDB
 =========
 
-[![Build Status](https://travis-ci.org/CarlosLongarela/ansible-role-ntp.svg?branch=master)](https://travis-ci.org/CarlosLongarela/ansible-role-ntp)
+[![Build Status](https://travis-ci.org/CarlosLongarela/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/CarlosLongarela/ansible-role-mariadb)
 
 Install MariaDB, basic security options and utils for databse tuning and backups with cron tasks.
 
