@@ -18,13 +18,13 @@ Role Variables
     mariadb_service_name: mysql
     mariadb_secure_installation: True
 
-    mariadb_root_password:
+    mariadb_root_password: changeme
 
     mariadb_server_path_utiles: /root/utiles
 
     mariadb_path_backups: /home/db_backups/
 
-    mariadb_databases:
+    mariadb_databases: []
 
     mariadb_options:
       bind_address: '127.0.0.1'
