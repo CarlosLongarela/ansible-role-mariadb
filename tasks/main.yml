@@ -108,7 +108,7 @@
     owner: root
     group: root
     mode: 0750
-  when: utiles_bd
+  when: mariadb_utiles_bd
 
 - name: Creamos el directorio de Backups de la BD.
   file:
