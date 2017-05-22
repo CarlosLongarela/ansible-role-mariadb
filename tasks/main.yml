@@ -154,7 +154,7 @@
 
 - name: Creamos enlace simbólico de phpMyAdmin.
   file:
-    src: "/var/www/phpmyadmin"
+    src: "/usr/share/phpmyadmin"
     dest: "{{ mariadb_phpmyadmin_symlink }}"
     state: link
   when: mariadb_phpmyadmin
