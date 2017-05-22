@@ -51,7 +51,7 @@ Role Variables
       mariadb_cron_optimizacion: false
 
       mariadb_phpmyadmin: false
-      mariadb_phpmyadmin_root_path: "/home/webs"
+      mariadb_phpmyadmin_symlink: "/home/webs"
 
     mariadb_cron_backup_db:
       minute: "15"
@@ -71,7 +71,7 @@ Role Variables
 Dependencies
 ------------
 
-- Composer (if mariadb_php_myadmin is set to true)
+None.
 
 Example Playbook
 ----------------
@@ -92,6 +92,7 @@ Example Playbook
         mariadb_cron_optimizacion: true
 
         mariadb_php_myadmin: true
+        mariadb_phpmyadmin_symlink: "/home/webs/phpmyadmin"
 
        roles:
          - { role: CarlosLongarela.mariadb }

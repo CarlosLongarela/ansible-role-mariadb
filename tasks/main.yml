@@ -139,10 +139,22 @@
     job: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
   when: mariadb_cron_optimizacion
 
-- name: Instalamos PhpMyAdmin.
-  composer:
-    command: create-project
-    arguments: phpmyadmin/phpmyadmin
-    working_dir: "{{ mariadb_phpmyadmin_root_path }}"
-    prefer_dist: yes
-    no_dev: true
+- name: Añadimos repositorio de phpMyAdmin.
+  apt_repository:
+    repo: "ppa:nijel/phpmyadmin"
+  when: mariadb_phpmyadmin
+
+- name: Instalamos phpMyAdmin.
+  apt:
+    name: phpmyadmin
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ aptget_update_cache_valid_time }}"
+  when: mariadb_phpmyadmin
+
+- name: Creamos enlace simbólico de phpMyAdmin.
+  file:
+    src: "/var/www/phpmyadmin"
+    dest: "{{ mariadb_phpmyadmin_symlink }}"
+    state: link
+  when: mariadb_phpmyadmin
