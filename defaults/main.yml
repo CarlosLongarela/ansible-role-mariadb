@@ -11,6 +11,24 @@ mariadb_server_path_utiles: /root/utiles
 mariadb_path_backups: /home/db_backups/
 
 mariadb_databases: []
+# delete [] and define databases
+# - database1
+# - database2
+
+mariadb_users: []
+# delete [] and define databases
+# - user1:
+#      name: "usuario1"
+#      password: "clave1"
+#      priv: "*.*:ALL"
+# - user2:
+#      name: "usuario2"
+#      password: "clave2"
+#      priv: "db.table:priv1,priv2"
+# - user3:
+#      name: "usuario3"
+#      password: "clave3"
+#      priv: "bdpruebas.*:ALL"
 
 mariadb_options:
   bind_address: '127.0.0.1'

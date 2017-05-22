@@ -25,6 +25,24 @@ Role Variables
     mariadb_path_backups: /home/db_backups/
 
     mariadb_databases: []
+    # delete [] and define databases
+    # - database1
+    # - database2
+
+    mariadb_users: []
+    # delete [] and define databases
+    # - user1:
+    #      name: "usuario1"
+    #      password: "clave1"
+    #      priv: "*.*:ALL"
+    # - user2:
+    #      name: "usuario2"
+    #      password: "clave2"
+    #      priv: "db.table:priv1,priv2"
+    # - user3:
+    #      name: "usuario3"
+    #      password: "clave3"
+    #      priv: "bdpruebas.*:ALL"
 
     mariadb_options:
       bind_address: '127.0.0.1'
@@ -87,6 +105,12 @@ Example Playbook
 
         mariadb_databases:
           - mydatabase
+
+        mariadb_users:
+          - user1:
+            name: "usuario1"
+            password: "clave1"
+            priv: "mydatabase.*:ALL"
 
         mariadb_utiles_bd: true
         mariadb_cron_backup: true

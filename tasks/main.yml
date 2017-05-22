@@ -74,6 +74,22 @@
   with_items:
     - localhost
 
+- name: Creamos las Bases de Datos.
+  mysql_db:
+    name: "{{ item.name }}"
+    state: present
+  with_items:
+    - mariadb_databases
+
+- name: Creamos los usuarios de Bases de Datos.
+  mysql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv }}"
+    state: present
+  with_items:
+    - mariadb_users
+
 - name: Creamos el directorio de utilidades.
   file:
     path: "{{ mariadb_server_path_utiles }}"
