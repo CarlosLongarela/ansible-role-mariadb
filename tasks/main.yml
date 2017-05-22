@@ -76,7 +76,7 @@
 
 - name: Creamos las Bases de Datos.
   mysql_db:
-    name: "{{ item.name }}"
+    name: "{{ item }}"
     state: present
   with_items:
     - mariadb_databases
