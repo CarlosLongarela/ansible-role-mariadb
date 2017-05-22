@@ -155,6 +155,19 @@
 - name: Creamos enlace simbólico de phpMyAdmin.
   file:
     src: "/usr/share/phpmyadmin"
-    dest: "{{ mariadb_phpmyadmin_symlink }}"
+    dest: "{{ mariadb_phpmyadmin_path }}"
     state: link
-  when: mariadb_phpmyadmin
+  when:
+    - mariadb_phpmyadmin
+    - mariadb_phpmyadmin_mode == "symlink"
+
+- name: Copiamos el directorio de phpMyAdmin.
+  copy:
+    src: "/usr/share/phpmyadmin"
+    dest: "{{ mariadb_phpmyadmin_path }}"
+    owner: www-data
+    group: www-data
+    mode: 0755
+  when:
+    - mariadb_phpmyadmin
+    - mariadb_phpmyadmin_mode == "copy"

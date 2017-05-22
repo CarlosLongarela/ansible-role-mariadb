@@ -37,7 +37,8 @@ mariadb_cron_backup: false
 mariadb_cron_optimizacion: false
 
 mariadb_phpmyadmin: false
-mariadb_phpmyadmin_symlink: "/home/webs"
+mariadb_phpmyadmin_path: "/home/webs"
+mariadb_phpmyadmin_mode: "symlink" # posible modes are "symlink" and "copy"
 
 mariadb_cron_backup_db:
   minute: "15"
