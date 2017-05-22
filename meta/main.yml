@@ -18,5 +18,4 @@ galaxy_info:
     - web
     - databases
 
-dependencies:
-  - git
+dependencies: []

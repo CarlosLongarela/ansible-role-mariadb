@@ -72,7 +72,7 @@ Role Variables
 Dependencies
 ------------
 
-- Git
+- Git (if mariadb_php_myadmin is set to true)
 
 Example Playbook
 ----------------
