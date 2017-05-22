@@ -46,7 +46,13 @@ Role Variables
       read_rnd_buffer_size: 4M
       key_buffer: 500M
 
-    mariadb_utiles_bd: true
+      mariadb_utiles_bd: false
+      mariadb_cron_backup: false
+      mariadb_cron_optimizacion: false
+
+      mariadb_phpmyadmin: false
+      mariadb_phpmyadmin_url: "https://github.com/phpmyadmin/phpmyadmin/archive/master.zip"
+      mariadb_phpmyadmin_root_path: "/home/webs"
 
     mariadb_cron_backup_db:
       minute: "15"
@@ -81,7 +87,11 @@ Example Playbook
       mariadb_databases:
         - mydatabase
 
-      mariadb_utiles_bd: true
+          mariadb_utiles_bd: true
+          mariadb_cron_backup: true
+          mariadb_cron_optimizacion: true
+
+          mariadb_php_myadmin: true
 
         roles:
           - { role: CarlosLongarela.mariadb }

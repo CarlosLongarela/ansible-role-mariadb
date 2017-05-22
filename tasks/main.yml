@@ -127,7 +127,7 @@
     day: "{{ mariadb_cron_backup_db.day }}"
     weekday: "{{ mariadb_cron_backup_db.weekday }}"
     job: "{{ mariadb_server_path_utiles }}/copia_bd.sh"
-  when: mariadb_utiles_bd
+  when: mariadb_cron_backup
 
 - name: Añadimos la tarea cron de Optimización de BD.
   cron:
@@ -137,4 +137,13 @@
     day: "{{ mariadb_cron_optimiza_db.day }}"
     weekday: "{{ mariadb_cron_optimiza_db.weekday }}"
     job: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
-  when: mariadb_utiles_bd
+  when: mariadb_cron_optimizacion
+
+- name: Descomprimimos el zip de PhpMyAdmin
+  unarchive:
+    src: "{{ mariadb_phpmyadmin_url }}"
+    dest: "{{ mariadb_phpmyadmin_root_path }}"
+    owner: www-data
+    group: www-data
+    creates: "{{ mariadb_phpmyadmin_root_path }}/phpmyadmin-installed.ok"
+  when: mariadb_phpmyadmin
