@@ -72,7 +72,7 @@ Role Variables
 Dependencies
 ------------
 
-None.
+- Git
 
 Example Playbook
 ----------------

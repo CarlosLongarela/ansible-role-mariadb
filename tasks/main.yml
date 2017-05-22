@@ -139,11 +139,9 @@
     job: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
   when: mariadb_cron_optimizacion
 
-- name: Descomprimimos el zip de PhpMyAdmin
-  unarchive:
-    src: "{{ mariadb_phpmyadmin_url }}"
+- name: Instalamos PhpMyAdmin.
+  git:
+    repo: "{{ mariadb_phpmyadmin_url }}"
     dest: "{{ mariadb_phpmyadmin_root_path }}"
-    owner: www-data
-    group: www-data
-    creates: "{{ mariadb_phpmyadmin_root_path }}/phpmyadmin-installed.ok"
+    update: yes
   when: mariadb_phpmyadmin
