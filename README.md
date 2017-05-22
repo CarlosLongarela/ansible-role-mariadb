@@ -31,18 +31,18 @@ Role Variables
 
     mariadb_users: []
     # delete [] and define databases
-    # - user1:
-    #      name: "usuario1"
-    #      password: "clave1"
-    #      priv: "*.*:ALL"
-    # - user2:
-    #      name: "usuario2"
-    #      password: "clave2"
-    #      priv: "db.table:priv1,priv2"
-    # - user3:
-    #      name: "usuario3"
-    #      password: "clave3"
-    #      priv: "bdpruebas.*:ALL"
+    # user1:
+    #    name: "usuario1"
+    #    password: "clave1"
+    #    priv: "*.*:ALL"
+    # user2:
+    #    name: "usuario2"
+    #    password: "clave2"
+    #    priv: "db.table:priv1,priv2"
+    # user3:
+    #    name: "usuario3"
+    #    password: "clave3"
+    #    priv: "bdpruebas.*:ALL"
 
     mariadb_options:
       bind_address: '127.0.0.1'
@@ -107,7 +107,7 @@ Example Playbook
           - mydatabase
 
         mariadb_users:
-          - user1:
+          user1:
             name: "usuario1"
             password: "clave1"
             priv: "mydatabase.*:ALL"

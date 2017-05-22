@@ -83,12 +83,11 @@
 
 - name: Creamos los usuarios de Bases de Datos.
   mysql_user:
-    name: "{{ item.name }}"
-    password: "{{ item.password }}"
-    priv: "{{ item.priv }}"
+    name: "{{ item.value.name }}"
+    password: "{{ item.value.password }}"
+    priv: "{{ item.value.priv }}"
     state: present
-  with_items:
-    - "{{ mariadb_users }}"
+  with_dict: "{{ mariadb_users }}"
 
 - name: Creamos el directorio de utilidades.
   file:
