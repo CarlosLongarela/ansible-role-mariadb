@@ -140,8 +140,9 @@
   when: mariadb_cron_optimizacion
 
 - name: Instalamos PhpMyAdmin.
-  git:
-    repo: "{{ mariadb_phpmyadmin_url }}"
-    dest: "{{ mariadb_phpmyadmin_root_path }}"
-    update: yes
-  when: mariadb_phpmyadmin
+  composer:
+    command: create-project
+    arguments: phpmyadmin/phpmyadmin
+    working_dir: "{{ mariadb_phpmyadmin_root_path }}"
+    prefer_dist: yes
+    no_dev: true

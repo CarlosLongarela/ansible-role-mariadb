@@ -51,7 +51,6 @@ Role Variables
       mariadb_cron_optimizacion: false
 
       mariadb_phpmyadmin: false
-      mariadb_phpmyadmin_url: "https://github.com/phpmyadmin/phpmyadmin/archive/master.zip"
       mariadb_phpmyadmin_root_path: "/home/webs"
 
     mariadb_cron_backup_db:
@@ -72,7 +71,7 @@ Role Variables
 Dependencies
 ------------
 
-- Git (if mariadb_php_myadmin is set to true)
+- Composer (if mariadb_php_myadmin is set to true)
 
 Example Playbook
 ----------------
