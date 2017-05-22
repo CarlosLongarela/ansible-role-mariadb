@@ -82,19 +82,20 @@ Example Playbook
       gather_facts: no
       become: true
 
-      mariadb_root_password: cambiame
+      vars:
+        mariadb_root_password: cambiame
 
-      mariadb_databases:
-        - mydatabase
+        mariadb_databases:
+          - mydatabase
 
-          mariadb_utiles_bd: true
-          mariadb_cron_backup: true
-          mariadb_cron_optimizacion: true
+        mariadb_utiles_bd: true
+        mariadb_cron_backup: true
+        mariadb_cron_optimizacion: true
 
-          mariadb_php_myadmin: true
+        mariadb_php_myadmin: true
 
-        roles:
-          - { role: CarlosLongarela.mariadb }
+       roles:
+         - { role: CarlosLongarela.mariadb }
 
 License
 -------
