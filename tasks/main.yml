@@ -169,12 +169,12 @@
 #    repo: "ppa:nijel/phpmyadmin"
 #  when: mariadb_phpmyadmin
 #
-- name: Desinstalamos phpMyAdmin del paquete.
-  apt:
-    name: phpmyadmin
-    state: absent
-    update_cache: yes
-    cache_valid_time: "{{ aptget_update_cache_valid_time }}"
+#- name: Desinstalamos phpMyAdmin del paquete.
+#  apt:
+#    name: phpmyadmin
+#    state: absent
+#    update_cache: yes
+#    cache_valid_time: "{{ aptget_update_cache_valid_time }}"
 #  when: mariadb_phpmyadmin
 #
 #- name: Creamos enlace simbólico de phpMyAdmin.
