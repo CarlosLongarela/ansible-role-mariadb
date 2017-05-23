@@ -154,22 +154,22 @@
     job: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
   when: mariadb_cron_optimizacion
 
-- name: Descomprimimos el zip de phpMyAdmin.
-  unarchive:
-    src: "{{ mariadb_phpmyadmin_url }}"
-    dest: "{{ mariadb_phpmyadmin_path }}"
-    owner: www-data
-    group: www-data
-    mode: 0755
-    remote_src: true
-    creates: "{{ mariadb_phpmyadmin_path }}/phpmyadmin-installed.ok"
+#- name: Descomprimimos el zip de phpMyAdmin.
+#  unarchive:
+#    src: "{{ mariadb_phpmyadmin_url }}"
+#    dest: "{{ mariadb_phpmyadmin_path }}"
+#    owner: www-data
+#    group: www-data
+#    mode: 0755
+#    remote_src: true
+#    creates: "{{ mariadb_phpmyadmin_path }}/phpmyadmin-installed.ok"
 
 #- name: Añadimos repositorio de phpMyAdmin.
 #  apt_repository:
 #    repo: "ppa:nijel/phpmyadmin"
 #  when: mariadb_phpmyadmin
 #
-- name: Instalamos phpMyAdmin.
+- name: Desinstalamos phpMyAdmin del paquete.
   apt:
     name: phpmyadmin
     state: absent
