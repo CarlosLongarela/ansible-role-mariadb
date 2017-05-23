@@ -183,6 +183,8 @@
     owner: www-data
     group: www-data
     mode: 0755
+    remote_src: yes
+    directory_mode: yes
   when:
     - mariadb_phpmyadmin
     - mariadb_phpmyadmin_mode == "copy"
