@@ -177,14 +177,10 @@
     - mariadb_phpmyadmin_mode == "symlink"
 
 - name: Copiamos el directorio de phpMyAdmin.
-  copy:
+  synchronize:
     src: "/usr/share/phpmyadmin"
     dest: "{{ mariadb_phpmyadmin_path }}"
-    owner: www-data
-    group: www-data
-    mode: 0755
-    remote_src: yes
-    directory_mode: yes
+  delegate_to: "{{ inventory_hostname }}"
   when:
     - mariadb_phpmyadmin
     - mariadb_phpmyadmin_mode == "copy"
