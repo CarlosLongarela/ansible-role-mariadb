@@ -10,6 +10,11 @@ Requirements
 
 None.
 
+Changes
+------------
+
+Deleted PhpMyAdmin installation, now PhpMyAdmin has it's own role in Galaxy: [CarlosLongarela.phpmyadmin](https://galaxy.ansible.com/CarlosLongarela/phpmyadmin/)
+
 Role Variables
 --------------
 
@@ -68,10 +73,6 @@ Role Variables
       mariadb_cron_backup: false
       mariadb_cron_optimizacion: false
 
-      mmariadb_phpmyadmin: false
-      mariadb_phpmyadmin_path: "/home/webs"
-      mariadb_phpmyadmin_mode: "symlink" # posible modes are "symlink" and "copy"
-
     mariadb_cron_backup_db:
       minute: "15"
       hour: "3"
@@ -115,10 +116,6 @@ Example Playbook
         mariadb_utiles_bd: true
         mariadb_cron_backup: true
         mariadb_cron_optimizacion: true
-
-        mariadb_php_myadmin: true
-        mariadb_phpmyadmin_path: "/home/webs/phpmyadmin"
-        mariadb_phpmyadmin_mode: "copy"
 
        roles:
          - { role: CarlosLongarela.mariadb }
