@@ -154,33 +154,43 @@
     job: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
   when: mariadb_cron_optimizacion
 
-- name: Añadimos repositorio de phpMyAdmin.
-  apt_repository:
-    repo: "ppa:nijel/phpmyadmin"
-  when: mariadb_phpmyadmin
+- name: Descomprimimos el zip de phpMyAdmin.
+  unarchive:
+    src: "{{ mariadb_phpmyadmin_url }}"
+    dest: "{{ mariadb_phpmyadmin_path }}"
+    owner: www-data
+    group: www-data
+    mode: 0755
+    remote_src: true
+    creates: "{{ mariadb_phpmyadmin_path }}/phpmyadmin-installed.ok"
 
+#- name: Añadimos repositorio de phpMyAdmin.
+#  apt_repository:
+#    repo: "ppa:nijel/phpmyadmin"
+#  when: mariadb_phpmyadmin
+#
 - name: Instalamos phpMyAdmin.
   apt:
     name: phpmyadmin
-    state: present
+    state: absent
     update_cache: yes
     cache_valid_time: "{{ aptget_update_cache_valid_time }}"
-  when: mariadb_phpmyadmin
-
-- name: Creamos enlace simbólico de phpMyAdmin.
-  file:
-    src: "/usr/share/phpmyadmin"
-    dest: "{{ mariadb_phpmyadmin_path }}"
-    state: link
-  when:
-    - mariadb_phpmyadmin
-    - mariadb_phpmyadmin_mode == "symlink"
-
-- name: Copiamos el directorio de phpMyAdmin.
-  synchronize:
-    src: "/usr/share/phpmyadmin"
-    dest: "{{ mariadb_phpmyadmin_path }}"
-  delegate_to: "{{ inventory_hostname }}"
-  when:
-    - mariadb_phpmyadmin
-    - mariadb_phpmyadmin_mode == "copy"
+#  when: mariadb_phpmyadmin
+#
+#- name: Creamos enlace simbólico de phpMyAdmin.
+#  file:
+#    src: "/usr/share/phpmyadmin"
+#    dest: "{{ mariadb_phpmyadmin_path }}"
+#    state: link
+#  when:
+#    - mariadb_phpmyadmin
+#    - mariadb_phpmyadmin_mode == "symlink"
+#
+#- name: Copiamos el directorio de phpMyAdmin.
+#  synchronize:
+#    src: "/usr/share/phpmyadmin"
+#    dest: "{{ mariadb_phpmyadmin_path }}"
+#  delegate_to: "{{ inventory_hostname }}"
+#  when:
+#    - mariadb_phpmyadmin
+#    - mariadb_phpmyadmin_mode == "copy"
