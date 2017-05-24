@@ -1,30 +1,36 @@
 # {{ ansible_managed }}
 
 [client]
-user                     = root
-password                 = {{ mariadb_root_password }}
+user                           = root
+password                       = {{ mariadb_root_password }}
 
 [mysqld]
-bind_address             = {{ mariadb_options.bind_address }}
-performance_schema       = {{ mariadb_options.performance_schema }}
-skip-name-resolve        = {{ mariadb_options.skip_name_resolve }}
+bind_address                   = {{ mariadb_options.bind_address }}
+performance_schema             = {{ mariadb_options.performance_schema }}
+skip-name-resolve              = {{ mariadb_options.skip_name_resolve }}
 
-max_connections          = {{ mariadb_options.max_connections }}
-connect_timeout          = {{ mariadb_options.connect_timeout }}
-max_allowed_packet       = {{ mariadb_options.max_allowed_packet }}
+max_connections                = {{ mariadb_options.max_connections }}
+connect_timeout                = {{ mariadb_options.connect_timeout }}
+max_allowed_packet             = {{ mariadb_options.max_allowed_packet }}
 
-innodb_buffer_pool_size  = {{ mariadb_options.innodb_buffer_pool_size }}
-table_cache              = {{ mariadb_options.table_cache }}
+innodb_buffer_pool_instances   = {{ mariadb_options.innodb_buffer_pool_instances }}
+innodb_buffer_pool_size        = {{ mariadb_options.innodb_buffer_pool_size }}
+table_cache                    = {{ mariadb_options.table_cache }}
 
-tmp_table_size           = {{ mariadb_options.tmp_table_size }}
-max_heap_table_size      = {{ mariadb_options.max_heap_table_size }}
+tmp_table_size                 = {{ mariadb_options.tmp_table_size }}
+max_heap_table_size            = {{ mariadb_options.max_heap_table_size }}
 
-query_cache_limit        = {{ mariadb_options.query_cache_limit }}
-query_cache_size         = {{ mariadb_options.query_cache_size }}
-query_cache_min_res_unit = {{ mariadb_options.query_cache_min_res_unit }}
+query_cache_type               = {{ mariadb_options.query_cache_type }}
+query_cache_limit              = {{ mariadb_options.query_cache_limit }}
+query_cache_size               = {{ mariadb_options.query_cache_size }}
+query_cache_min_res_unit       = {{ mariadb_options.query_cache_min_res_unit }}
 
-join_buffer_size         = {{ mariadb_options.join_buffer_size }}
-sort_buffer_size         = {{ mariadb_options.sort_buffer_size }}
-read_buffer_size         = {{ mariadb_options.read_buffer_size }}
-read_rnd_buffer_size     = {{ mariadb_options.read_rnd_buffer_size }}
-key_buffer               = {{ mariadb_options.key_buffer }}
+join_buffer_size               = {{ mariadb_options.join_buffer_size }}
+sort_buffer_size               = {{ mariadb_options.sort_buffer_size }}
+read_buffer_size               = {{ mariadb_options.read_buffer_size }}
+read_rnd_buffer_size           = {{ mariadb_options.read_rnd_buffer_size }}
+key_buffer                     = {{ mariadb_options.key_buffer }}
+
+slow_query_log                 = {{ mariadb_options.slow_query_log }}
+long_query_time                = {{ mariadb_options.long_query_time }}
+slow_queries_not_using_indexes = {{ mariadb_options.slow_queries_not_using_indexes }}

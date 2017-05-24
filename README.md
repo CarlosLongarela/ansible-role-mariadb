@@ -56,18 +56,23 @@ Role Variables
       max_connections: 100
       connect_timeout: 2
       max_allowed_packet: 10M
+      innodb_buffer_pool_instances: 1
       innodb_buffer_pool_size: 100M
       table_cache: 1000
       tmp_table_size: 50M
       max_heap_table_size: 50M
       query_cache_limit: 256K
-      query_cache_size: 20M
+      query_cache_type: 0
+      query_cache_size: 0
       query_cache_min_res_unit: 2k
       join_buffer_size: 2M
       sort_buffer_size: 256K
       read_buffer_size: 128K
       read_rnd_buffer_size: 4M
       key_buffer: 500M
+      slow_query_log: true
+      long_query_time: 5
+      slow_queries_not_using_indexes: true
 
       mariadb_utiles_bd: false
       mariadb_cron_backup: false
