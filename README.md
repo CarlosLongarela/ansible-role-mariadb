@@ -58,6 +58,7 @@ Role Variables
       max_allowed_packet: 10M
       innodb_buffer_pool_instances: 1
       innodb_buffer_pool_size: 100M
+      innodb_log_file_size: 25M
       table_cache: 1000
       tmp_table_size: 50M
       max_heap_table_size: 50M
