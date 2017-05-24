@@ -33,4 +33,5 @@ key_buffer                     = {{ mariadb_options.key_buffer }}
 
 slow_query_log                 = {{ mariadb_options.slow_query_log }}
 long_query_time                = {{ mariadb_options.long_query_time }}
-slow_queries_not_using_indexes = {{ mariadb_options.slow_queries_not_using_indexes }}
+log_slow_admin_statements      = {{ mariadb_options.log_slow_admin_statements }}
+log_queries_not_using_indexes  = {{ mariadb_options.log_queries_not_using_indexes }}

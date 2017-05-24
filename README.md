@@ -72,7 +72,8 @@ Role Variables
       key_buffer: 500M
       slow_query_log: true
       long_query_time: 5
-      slow_queries_not_using_indexes: true
+      log_slow_admin_statements: true
+      log_queries_not_using_indexes: true
 
       mariadb_utiles_bd: false
       mariadb_cron_backup: false
