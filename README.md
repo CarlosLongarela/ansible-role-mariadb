@@ -2,6 +2,8 @@ Ansible Role: MariaDB
 =========
 
 [![Build Status](https://travis-ci.org/CarlosLongarela/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/CarlosLongarela/ansible-role-mariadb)
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/CarlosLongarela/ansible-role-mariadb.svg)](http://isitmaintained.com/project/CarlosLongarela/ansible-role-mariadb "Percentage of issues still open")
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/CarlosLongarela/ansible-role-mariadb.svg)](http://isitmaintained.com/project/CarlosLongarela/ansible-role-mariadb "Average time to resolve an issue")
 
 Install MariaDB, basic security options and utils for database tuning and backups with cron tasks.
 
