@@ -60,6 +60,7 @@
     - 127.0.0.1
     - ::1
     - localhost
+  no_log: True
 
 - name: Eliminamos la Base de datos test.
   mysql_db:
@@ -80,6 +81,7 @@
     state: present
   with_items:
     - "{{ mariadb_databases }}"
+  no_log: True
 
 - name: Creamos los usuarios de Bases de Datos.
   mysql_user:
@@ -88,6 +90,7 @@
     priv: "{{ item.value.priv }}"
     state: present
   with_dict: "{{ mariadb_users }}"
+  no_log: True
 
 - name: Creamos el directorio de utilidades.
   file:
