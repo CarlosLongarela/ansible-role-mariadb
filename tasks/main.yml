@@ -19,13 +19,12 @@
 
 - name: Instalamos MariaDB.
   apt:
-    name: "{{ item }}"
+    name:
+      - mariadb-server
+      - mariadb-client
     state: present
     update_cache: yes
     cache_valid_time: "{{ aptget_update_cache_valid_time }}"
-  with_items:
-    - mariadb-server
-    - mariadb-client
 
 - name: Iniciamos y activamos el servicio.
   service:
