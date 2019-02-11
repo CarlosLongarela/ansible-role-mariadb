@@ -112,19 +112,23 @@
 - name: Instalamos el script de optimización de BD.
   template:
     src: optimiza_bd.sh.j2
-    dest: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
+    dest: "{{ mariadb_server_path_utiles }}/optimiza_bd_{{ item }}.sh"
     owner: root
     group: root
     mode: 0750
+  with_items:
+    - "{{ mariadb_databases }}"
   when: mariadb_utiles_bd
 
 - name: Instalamos el script de backups de BD.
   template:
     src: copia_bd.sh.j2
-    dest: "{{ mariadb_server_path_utiles }}/copia_bd.sh"
+    dest: "{{ mariadb_server_path_utiles }}/copia_bd_{{ item }}.sh"
     owner: root
     group: root
     mode: 0750
+  with_items:
+    - "{{ mariadb_databases }}"
   when: mariadb_utiles_bd
 
 - name: Creamos el directorio de Backups de la BD.
@@ -136,22 +140,26 @@
     mode: 0640
   when: mariadb_utiles_bd
 
-- name: Añadimos la tarea cron del BackUp de BD.
+- name: Añadimos las tareas cron del BackUp de BD.
   cron:
-    name: "BackUp de BDs"
+    name: "BackUp de BD {{ item }}"
     minute: "{{ mariadb_cron_backup_db.minute }}"
     hour: "{{ mariadb_cron_backup_db.hour }}"
     day: "{{ mariadb_cron_backup_db.day }}"
     weekday: "{{ mariadb_cron_backup_db.weekday }}"
-    job: "{{ mariadb_server_path_utiles }}/copia_bd.sh"
+    job: "{{ mariadb_server_path_utiles }}/copia_bd_{{ item }}.sh"
+  with_items:
+    - "{{ mariadb_databases }}"
   when: mariadb_cron_backup
 
-- name: Añadimos la tarea cron de Optimización de BD.
+- name: Añadimos las tareas cron de Optimización de BD.
   cron:
-    name: "Optimización de BDs"
+    name: "Optimización de BD {{ item }}"
     minute: "{{ mariadb_cron_optimiza_db.minute }}"
     hour: "{{ mariadb_cron_optimiza_db.hour }}"
     day: "{{ mariadb_cron_optimiza_db.day }}"
     weekday: "{{ mariadb_cron_optimiza_db.weekday }}"
-    job: "{{ mariadb_server_path_utiles }}/optimiza_bd.sh"
+    job: "{{ mariadb_server_path_utiles }}/optimiza_bd_{{ item }}.sh"
+  with_items:
+    - "{{ mariadb_databases }}"
   when: mariadb_cron_optimizacion
